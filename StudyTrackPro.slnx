@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="StudyTrackPro.Console/StudyTrackPro.Console.csproj" />
+  <Project Path="StudyTrackPro.Domain/StudyTrackPro.Domain.csproj" />
+</Solution>
