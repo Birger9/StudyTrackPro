@@ -8,82 +8,47 @@ namespace StudyTrackPro.Console
         static void Main(string[] args)
         {
             // Temporary testing area for Milestone 1
-            System.Console.WriteLine("StudyTrack Pro starting...");
+            System.Console.WriteLine("=== StudyTrack Pro ===");
+
+            // Create a course
+            Course course = new()
+            {
+                title = "C# Mastery",
+                provider = "Udemy"
+            };
+
+            // Create a module
+            Module module1 = new()
+            {
+                name = "Basics",
+                order = 1
+            };
 
             // Create lessons
-            var lesson1 = new Lesson
+            Lesson l1 = new()
             {
-                title = "Introduction to C#",
-                estimatedMinutes = 20,
-                isCompleted = false
+                title = "Variables",
+                estimatedMinutes = 10
             };
 
-            var lesson2 = new Lesson
+            Lesson l2 = new()
             {
-                title = "Classes & Objects",
-                estimatedMinutes = 35,
-                isCompleted = false
+                title = "Loops",
+                estimatedMinutes = 15
             };
 
-            var lesson3 = new Lesson
-            {
-                title = "Collections and LINQ",
-                estimatedMinutes = 40,
-                isCompleted = true
-            };
+            // Add lessons to module
+            module1.AddLesson(l1);
+            module1.AddLesson(l2);
 
-            // Create modules
-            var module1 = new Module
-            {
-                name = "Getting Started",
-                order = 1,
-                lessons = [lesson1, lesson2]
-            };
+            // Add module to course
+            course.AddModule(module1);
 
-            var module2 = new Module
-            {
-                name = "Intermediate Topics",
-                order = 2,
-                lessons = [lesson3]
-            };
+            // Mark lesson 1 as completed
+            l1.MarkCompleted();
 
-            // Create course
-            var course = new Course
-            {
-                title = "C# Fundamentals",
-                provider = "StudyTrack Pro",
-                modules = [module1, module2],
-                isCompleted = false
-            };
-
-            // Print course info to verify everything works
-            PrintCourseSummary(course);
-        }
-
-        private static void PrintCourseSummary(Course course)
-        {
-            System.Console.WriteLine();
-            System.Console.WriteLine($"Course: {course.title}");
-            System.Console.WriteLine($"Provider: {course.provider}");
-            System.Console.WriteLine($"Modules: {course.modules.Length}");
-
-            var courseStatus = course.isCompleted ? "Completed" : "Not completed";
-            System.Console.WriteLine(courseStatus);
-            System.Console.WriteLine(new string('-', 40));
-
-            foreach (var module in course.modules)
-            {
-                System.Console.WriteLine($"Module {module.order}: {module.name} (Lessons: {module.lessons.Length})");
-                foreach (var lesson in module.lessons)
-                {
-                    var status = lesson.isCompleted ? "Completed" : "Not completed";
-                    System.Console.WriteLine($"  - {lesson.title} [{lesson.estimatedMinutes} min] - {status}");
-                }
-                System.Console.WriteLine();
-            }
-
-            System.Console.WriteLine(new string('-', 40));
-            System.Console.WriteLine("End of course summary.");
+            // Print summary
+            course.PrintSummary();
         }
     }
 }
